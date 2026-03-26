@@ -11,7 +11,7 @@ public class Reserva {
     private Long id;
     private String numeroReserva;
     private String nombreHuesped;
-    private Number cantidadPersonas;
+    private Integer cantidadPersonas;
     private LocalDate fechaInicio;
     private LocalDate fechaTermino;
     private String estado;
