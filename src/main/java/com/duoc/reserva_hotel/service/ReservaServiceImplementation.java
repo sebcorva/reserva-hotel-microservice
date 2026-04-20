@@ -49,26 +49,23 @@ public class ReservaServiceImplementation implements ReservaService {
     }
 
     @Override
-    public Reserva createReserva(String nombreHuesped, Integer personas, String inicio, String fin) {
-
-        LocalDate fechaInicio = LocalDate.parse(inicio);
-        LocalDate fechaFin = LocalDate.parse(fin);
+    public Reserva createReserva(String nombreHuesped, Integer personas, LocalDate inicio, LocalDate fin) {
 
         if (nombreHuesped == null || nombreHuesped.isEmpty()) {
             throw new IllegalArgumentException("Debe ingresar un nombre válido.");
         }
 
-        if (!fechaInicio.isBefore(fechaFin)) {
+        if (!inicio.isBefore(fin)) {
             throw new IllegalArgumentException("La fecha de inicio debe ser anterior a la de término.");
         }
 
-        if (isAvailable(fechaInicio, fechaFin)) {
+        if (isAvailable(inicio, fin)) {
             Reserva nuevaReserva = new Reserva();
             nuevaReserva.setNombreHuesped(nombreHuesped);
             nuevaReserva.setCantidadPersonas(personas);
-            nuevaReserva.setFechaInicio(fechaInicio);
-            nuevaReserva.setFechaTermino(fechaFin);
-            nuevaReserva.setEstado("RESERVADA");
+            nuevaReserva.setFechaInicio(inicio);
+            nuevaReserva.setFechaTermino(fin);
+            nuevaReserva.setEstado("RESERVADO");
 
             Reserva reservaGuardada = reservaRepository.save(nuevaReserva);
 
@@ -88,28 +85,21 @@ public class ReservaServiceImplementation implements ReservaService {
     }
 
     @Override
-    public Reserva updateReserva(Long id, String nombreHuesped, Integer personas, String inicio, String fin, String estado) {
-        LocalDate fechaInicio = LocalDate.parse(inicio);
-        LocalDate fechaFin = LocalDate.parse(fin);
+    public Reserva updateReserva(Long id, String nombreHuesped, Integer personas, LocalDate inicio, LocalDate fin, String estado) {
+        
+        Optional<Reserva> optionalReserva = getReservasById(id);
 
-        List<Reserva> reservas = reservaRepository.findAll();
+        if (optionalReserva.isPresent()) {
+            Reserva reservaExistente = optionalReserva.get();
+            
+            reservaExistente.setNombreHuesped(nombreHuesped);
+            reservaExistente.setCantidadPersonas(personas);
+            reservaExistente.setFechaInicio(inicio);
+            reservaExistente.setFechaTermino(fin);
+            reservaExistente.setEstado(estado);
 
-        for (Reserva r : reservas){
-            if (r.getId().equals(id)){
-                Reserva reservaActualizada = new Reserva();
-                reservaActualizada.setId(id);
-                reservaActualizada.setNumeroReserva(r.getNumeroReserva());
-                reservaActualizada.setNombreHuesped(nombreHuesped);
-                reservaActualizada.setCantidadPersonas(personas);
-                reservaActualizada.setFechaInicio(fechaInicio);
-                reservaActualizada.setFechaTermino(fechaFin);
-                reservaActualizada.setEstado(estado);
-
-                return reservaRepository.save(reservaActualizada);
-            }
+            return reservaRepository.save(reservaExistente);
         }
-        return null;
+        return null; 
     }
-
-    
 }

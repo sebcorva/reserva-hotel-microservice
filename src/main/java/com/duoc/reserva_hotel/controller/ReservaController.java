@@ -8,6 +8,8 @@ import com.duoc.reserva_hotel.dto.ReservaDtoUpdate;
 import com.duoc.reserva_hotel.model.Reserva;
 import com.duoc.reserva_hotel.service.ReservaService;
 
+import jakarta.validation.Valid;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -39,7 +41,7 @@ public class ReservaController {
         "fin": "2026-05-18"
         } */
     @PostMapping("/crear")
-    public Reserva createReserva(@RequestBody ReservaDto dto) {
+    public Reserva createReserva(@Valid @RequestBody ReservaDto dto) {
         return reservaService.createReserva(dto.nombreHuesped(), dto.personas(), dto.inicio(), dto.fin());
     }
 
@@ -57,7 +59,7 @@ public class ReservaController {
         "estado": "RESERVADA"
     } */
     @PutMapping("/{id}")
-    public Reserva updateReserva(@PathVariable Long id, @RequestBody ReservaDtoUpdate dto){
+    public Reserva updateReserva(@Valid @PathVariable Long id, @RequestBody ReservaDtoUpdate dto){
         return reservaService.updateReserva(id, dto.nombreHuesped(), dto.personas(), dto.inicio(), dto.fin(), dto.estado());
     }
 }

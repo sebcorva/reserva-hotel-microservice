@@ -13,8 +13,8 @@ public interface ReservaService {
     List<Reserva> getAllReservas();
     Optional<Reserva> getReservasById(Long id);
     boolean isAvailable(LocalDate inicio, LocalDate fin);
-    Reserva createReserva(String nombreHuesped, Integer personas, String inicio, String fin);
+    Reserva createReserva(String nombreHuesped, Integer personas, LocalDate inicio, LocalDate fin);
     void deleteReserva(Long id);
-    Reserva updateReserva (Long id, String nombreHuesped, Integer personas, String inicio, String fin, String estado);
+    Reserva updateReserva (Long id, String nombreHuesped, Integer personas, LocalDate inicio, LocalDate fin, String estado);
     
 }
