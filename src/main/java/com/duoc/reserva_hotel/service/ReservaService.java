@@ -1,6 +1,9 @@
-package com.duoc.reserva_hotel;
+package com.duoc.reserva_hotel.service;
 
 import org.springframework.stereotype.Service;
+
+import com.duoc.reserva_hotel.model.Reserva;
+
 import java.util.Optional;
 import java.time.LocalDate;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.duoc.reserva_hotel;
+package com.duoc.reserva_hotel.model;
 
 import java.time.LocalDate;
 

@@ -1,7 +1,12 @@
-package com.duoc.reserva_hotel;
+package com.duoc.reserva_hotel.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import com.duoc.reserva_hotel.dto.ReservaDto;
+import com.duoc.reserva_hotel.dto.ReservaDtoUpdate;
+import com.duoc.reserva_hotel.model.Reserva;
+import com.duoc.reserva_hotel.service.ReservaService;
 
 import java.time.LocalDate;
 import java.util.List;

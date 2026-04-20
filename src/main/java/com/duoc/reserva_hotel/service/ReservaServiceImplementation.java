@@ -1,11 +1,12 @@
-package com.duoc.reserva_hotel;
+package com.duoc.reserva_hotel.service;
 
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.duoc.reserva_hotel.model.Reserva;
+import com.duoc.reserva_hotel.repository.ReservaRepository;
+
 import java.time.LocalDate;
-import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 import java.util.List;
@@ -25,14 +26,14 @@ public class ReservaServiceImplementation implements ReservaService {
         if(id!=null){
             return reservaRepository.findById(id);
         }else {
-            return null;
+            throw new IllegalArgumentException("Reserva no encontrada");
         } 
     }
 
     @Override
     public boolean isAvailable(LocalDate inicio, LocalDate fin) {
         if (fin.isBefore(inicio) || fin.isEqual(inicio)){
-            throw new IllegalArgumentException("Error: la fecha ingresada no es valida ");
+            throw new IllegalArgumentException("La fecha ingresada no es valida ");
         }
 
         List<Reserva> reservas = reservaRepository.findAll();
@@ -108,7 +109,6 @@ public class ReservaServiceImplementation implements ReservaService {
             }
         }
         return null;
-
     }
 
     
