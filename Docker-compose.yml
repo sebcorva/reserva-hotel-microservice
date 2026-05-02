@@ -1,0 +1,14 @@
+version: '1'
+services:
+ microservicio:
+  build:
+   context: .
+   dockerfile: Dockerfile
+  ports:
+   - "8080:8080"
+  environment:
+  #cambiamos la wallet y usuario/contraseña
+   - spring.datasource.url=jdbc:oracle:thin:@ri9zrk174m80adkh_high?TNS_ADMIN=/app/wallet/
+   - spring.datasource.username=HOTEL_ADMIN
+   - spring.datasource.password=UsuarioAdmin.1234
+  restart: always
