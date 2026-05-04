@@ -22,7 +22,7 @@ public class Reserva {
     @Column(name = "numero_reserva")
     private String numeroReserva;
 
-    @Pattern(regexp = "^[a-zA-Z]+$", message = "El nombre solo debe contener letras")
+    @Pattern(regexp = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", message = "El nombre solo debe contener letras")
     @NotBlank(message = "Debe ingresar un nombre valido")
     @Column(name = "nombre_huesped")
     private String nombreHuesped;

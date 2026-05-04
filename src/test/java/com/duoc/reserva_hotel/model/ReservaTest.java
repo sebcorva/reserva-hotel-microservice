@@ -9,6 +9,7 @@ public class ReservaTest {
     @Test
     void testGettersAndSetters() {
         Reserva reserva = new Reserva();
+        
         reserva.setId(1L);
         reserva.setNumeroReserva("HR1");
         reserva.setNombreHuesped("Sebastian Corvalan");

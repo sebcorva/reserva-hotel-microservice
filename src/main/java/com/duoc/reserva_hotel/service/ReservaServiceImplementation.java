@@ -65,7 +65,7 @@ public class ReservaServiceImplementation implements ReservaService {
             nuevaReserva.setCantidadPersonas(personas);
             nuevaReserva.setFechaInicio(inicio);
             nuevaReserva.setFechaTermino(fin);
-            nuevaReserva.setEstado("RESERVADO");
+            nuevaReserva.setEstado("RESERVADA");
 
             Reserva reservaGuardada = reservaRepository.save(nuevaReserva);
 
